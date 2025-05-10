@@ -1,0 +1,78 @@
+<div mat-dialog-content>
+    <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{title}}</mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
+          
+             <!-- ID (oculto) -->
+        <mat-form-field appearance="fill" class="hidden-field">
+  <input matInput formControlName="id" type="text">  <!-- Tipo text pero oculto -->
+</mat-form-field>
+            
+            <!-- Nombre -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="nombre" required maxlength="100">
+              <mat-error *ngIf="productoForm.get('nombre')?.hasError('required')">
+                El nombre es requerido
+              </mat-error>
+              <mat-error *ngIf="productoForm.get('nombre')?.hasError('minlength')">
+                Mínimo 3 caracteres
+              </mat-error>
+            </mat-form-field>
+            
+            <!-- Descripción -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Descripción</mat-label>
+              <textarea matInput formControlName="descripcion" maxlength="500" rows="3"></textarea>
+            </mat-form-field>
+            
+            <!-- Precio Base -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Precio Base</mat-label>
+              <input matInput type="number" formControlName="precioBase" required min="0" step="0.01">
+              <span matPrefix>$&nbsp;</span>
+              <mat-error *ngIf="productoForm.get('precioBase')?.hasError('required')">
+                El precio es requerido
+              </mat-error>
+              <mat-error *ngIf="productoForm.get('precioBase')?.hasError('min')">
+                El precio no puede ser negativo
+              </mat-error>
+            </mat-form-field>
+            
+            <!-- Precio con Descuento -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Precio con Descuento (opcional)</mat-label>
+              <input matInput type="number" formControlName="precioDescuento" min="0" step="0.01">
+              <span matPrefix>$&nbsp;</span>
+              <mat-error *ngIf="productoForm.get('precioDescuento')?.hasError('min')">
+                El precio no puede ser negativo
+              </mat-error>
+            </mat-form-field>
+            
+            <!-- Imagen (URL) -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>URL de la Imagen</mat-label>
+              <input matInput formControlName="imagen" type="url">
+              <mat-error *ngIf="productoForm.get('imagen')?.hasError('url')">
+                Ingresa una URL válida
+              </mat-error>
+            </mat-form-field>
+            
+            <!-- Botones -->
+            <div class="button-row">
+              <button mat-raised-button color="primary" type="submit" [disabled]="!productoForm.valid">
+                {{ productoForm.get('id')?.value ? 'Actualizar' : 'Guardar' }}
+              </button>
+              <button mat-raised-button type="button" *ngIf="!(productoForm.get('id')?.value)" (click)="productoForm.reset()">
+                Limpiar
+              </button>
+              <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+</div>

@@ -1,0 +1,43 @@
+<h1 id="tableLabel">Evaluación</h1>
+
+<p *ngIf="!productos">
+    Cargando...
+</p>
+   
+<div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+    <!-- Input centrado arriba -->
+    <div style=" display: flex; flex-direction: row; width: 100%; max-width: 500px; margin-top: 20px; gap: 1rem;">
+      <button mat-raised-button color="primary" style="width: 30%;height:50px;" (click)="NewProducto()">Agregar</button>
+    </div>
+  
+    <!-- Tabla abajo (ocupando ancho completo) -->
+    <div style="width: 100%; overflow-x: auto;">
+        <table *ngIf="productos" style="width: 100%;">
+
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Precio Base</th>
+                    <th>Precio Descuento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let producto of productos">
+                    <td>{{ producto.id }}</td>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.precioBase }}</td>
+                    <td>{{ producto.precioDescuento }}</td>
+                   
+                    <td> 
+                        
+                        <button mat-raised-button color="secondary" (click)="UpdateProducto(producto)" >Update</button>
+                        <button mat-raised-button color="warn" (click)="confirm(producto)" >Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+

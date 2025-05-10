@@ -1,0 +1,18 @@
+.full-width {
+    width: 100%;
+  }
+  
+  .button-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  
+  mat-card {
+    max-width: 600px;
+    margin: 2rem auto;
+  }
+  .hidden-field {
+  display: none !important;
+}

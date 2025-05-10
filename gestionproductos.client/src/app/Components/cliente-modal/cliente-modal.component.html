@@ -1,0 +1,76 @@
+<div mat-dialog-content>
+    <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{title}}</mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+          
+             <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Id</mat-label>
+                <input matInput formControlName="id" required maxlength="100">
+                <mat-error *ngIf="clientForm.get('id')?.hasError('required')">
+                  Id is required
+                </mat-error>
+              </mat-form-field>
+                  <!-- Country -->
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Country</mat-label>
+                <input matInput formControlName="country" required maxlength="100">
+                <mat-error *ngIf="clientForm.get('country')?.hasError('required')">
+                  Country is required
+                </mat-error>
+              </mat-form-field>
+              
+            
+            <!-- Name -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" required maxlength="100">
+              <mat-error *ngIf="clientForm.get('name')?.hasError('required')">
+                Name is required
+              </mat-error>
+              <mat-error *ngIf="clientForm.get('name')?.hasError('minlength')">
+                Minimum 3 characters
+              </mat-error>
+            </mat-form-field>
+            
+        
+            <!-- Phone -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Phone</mat-label>
+              <input matInput formControlName="phone" required maxlength="100">
+              <mat-error *ngIf="clientForm.get('phone')?.hasError('required')">
+                Phone is required
+              </mat-error>
+            </mat-form-field>
+            
+            <!-- Category -->
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Category</mat-label>
+              <mat-select formControlName="category" required>
+                <mat-option *ngFor="let category of categories" [value]="category.value">
+                  {{category.viewValue}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="clientForm.get('category')?.hasError('required')">
+                Category is required
+              </mat-error>
+            </mat-form-field>
+            
+            <!-- Botones -->
+            <div class="button-row">
+              <button mat-raised-button color="primary" type="submit" [disabled]="!clientForm.valid">
+                Save
+              </button>
+              <button mat-raised-button type="button" (click)="clientForm.reset()">
+                Clean
+              </button>
+              <button mat-raised-button color="secondary" mat-dialog-close>Close</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+</div>

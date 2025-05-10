@@ -1,0 +1,51 @@
+<h1 id="tableLabel">Evaluación</h1>
+
+<p *ngIf="!clientes">
+    Cargando...
+</p>
+   
+<div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+    <!-- Input centrado arriba -->
+    <div style=" display: flex; flex-direction: row; width: 100%; max-width: 500px; margin-top: 20px; gap: 1rem;">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Client name" 
+               [(ngModel)]="name" 
+               >
+      </mat-form-field>
+      <button mat-raised-button color="primary" style="width: 30%;height:50px;" (click)="GetClientsByNameOrderedByCategory()">Search</button>
+      <button mat-raised-button color="secondary" style="width: 30%;height:50px;" (click)="NewClient()">Add Client</button>
+    </div>
+  
+    <!-- Tabla abajo (ocupando ancho completo) -->
+    <div style="width: 100%; overflow-x: auto;">
+        <table *ngIf="clientes" style="width: 100%;">
+
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Country</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientes">
+                    <td>{{ cliente.id }}</td>
+                    <td>{{ cliente.country }}</td>
+                    <td>{{ cliente.name }}</td>
+                    <td>{{ cliente.phone }}</td>
+                    <td>{{ cliente.category }}</td>
+                    <td> 
+                        
+                        <button mat-raised-button color="secondary" (click)="UpdateClient(cliente)" >Update</button>
+                        <button mat-raised-button color="warn" (click)="confirm(cliente)" >Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+
