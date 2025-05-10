@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "GestionProductos.Server\\GestionProductos.Server.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "gestionproductos.client\\gestionproductos.client.esproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
